@@ -1,0 +1,75 @@
+<!-- 상품 등록 처리 -->
+
+<%@page import="shop.dao.ProductRepository"%>
+<%@page import="shop.dto.Product"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+		String loginId = (String) session.getAttribute("loginId");
+		
+		//파일 저장 경로 및 크기 설정
+		String saveDirectory = application.getRealPath("/static/img");
+		int maxPostSize = 10 * 1024 * 1024;  // 최대 10 MB
+		
+		// 파일 업로드 요청을 파싱합니다.
+		FileItemFactory factory = new DiskFileItemFactory();
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		upload.setSizeMax(maxPostSize);
+		
+		try {
+		    List<FileItem> items = upload.parseRequest(request);
+		    Map<String, String> formFields = new HashMap<String, String>();
+		
+		    String fileName = "";
+		    // 폼 필드를 반복하여 데이터 처리
+		    for (FileItem item : items) {
+		        if (item.isFormField()) {
+		            // 일반 필드
+		            formFields.put(item.getFieldName(), item.getString("UTF-8"));
+		        } else {
+		            // 파일 필드
+		            fileName = item.getName();
+		            if (fileName != null && !fileName.isEmpty()) {
+		                fileName = FilenameUtils.getName(fileName);
+		                File uploadedFile = new File(saveDirectory, fileName);
+		                item.write(uploadedFile);
+		            }
+		        }
+		    }
+
+		    String productId = formFields.get("productId");	// 상품ID
+			String name = formFields.get("name");				// 상품명
+			Integer unitPrice = Integer.parseInt(formFields.get("unitPrice")); // 가격(단가)
+			String description = formFields.get("description");// 설명
+			String manufacturer = formFields.get("manufacturer");	// 제조 업체
+			String category = formFields.get("category");		 // 카테고리
+			long unitsInStock = Long.parseLong(formFields.get("unitsInStock")); // 재고 수
+			String condition = formFields.get("condition");		// 상태
+			 
+        // 유효성 검사 로직 추가 가능
+
+        Product product = new Product();
+        product.setFile(file);
+        product.setProductId(productId);
+        
+        product.setName(name);
+        product.setUnitPrice(unitPrice);
+        product.setDescription(description);
+        product.setManufacturer(manufacturer);
+        product.setCategory(category);
+        product.setUnitsInStock(unitsInStock);
+        product.setCondition(product_condition);
+
+        ProductRepository productDAO = new ProductRepository();
+        int result = productDAO.insert(product);
+
+        String productsPage = "/shop/products.jsp";
+        String root = request.getContextPath();
+
+        if (result > 0) {
+            response.sendRedirect(root + productsPage);
+        } else {
+        	out.println("<script>alert('등록에 실패했습니다.'); history.back();</script>");
+        }
+   
+%>

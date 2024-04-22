@@ -1,0 +1,9 @@
+# Data Source
+driver=com.mysql.cj.jdbc.Driver
+url=jdbc:mysql://127.0.0.1:3306/downy?serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false
+user=downy	 
+pw=fullsun0606!# Data Source
+driver=com.mysql.cj.jdbc.Driver
+String url = "jdbc:mysql://127.0.0.1:3306/joeun?serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false";
+String id = "downy";
+String pw = "fullsun0606!";

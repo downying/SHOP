@@ -1,0 +1,8 @@
+INDEX VERSION 1.134+D:\DOWNY\Shop_Test\.metadata\.plugins\org.eclipse.jdt.core
+2894771715.index
+1373867494.index
+1067094681.index
+2536107758.index
+1865797976.index
+1104881829.index
+3467484317.index

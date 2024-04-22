@@ -1,0 +1,28 @@
+<!-- 
+	회원 가입 처리
+ -->
+<%@page import="shop.dao.UserRepository"%>
+<%@page import="shop.dto.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+    String id = request.getParameter("id");
+	String name = request.getParameter("name");
+    String password = request.getParameter("password");
+	String gender = 
+    String gender = gender1 + '-' + gender2;
+    String birth = request.getParameter("birth");
+    String mail = request.getParameter("mail");
+    
+    User user = new User();
+    %>
+    
+    
+
+    
+    
+    
+    
+    
+    

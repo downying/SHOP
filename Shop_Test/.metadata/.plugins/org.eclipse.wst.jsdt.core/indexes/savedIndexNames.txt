@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+D:\DOWNY\Shop_Test\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2179782412.index
+1938410581.index
+666534519.index
+3104111770.index
+1067094681.index
+1059924838.index

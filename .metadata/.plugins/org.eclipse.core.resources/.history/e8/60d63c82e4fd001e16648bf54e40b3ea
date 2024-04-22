@@ -1,0 +1,47 @@
+<!-- 
+	상품 등록 처리
+ -->
+<%@page import="shop.dto.Product"%>
+<%@page import="shop.dao.UserRepository"%>
+<%@page import="shop.dto.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+    String file = request.getParameter("file");
+    String product_id = request.getParameter("product_id");
+    String name = request.getParameter("name");
+    int unit_price =  Integer.parseInt(request.getParameter("unit_price"));
+	String description = request.getParameter("description");
+	String manufacturer = request.getParameter("manufacturer");
+    String category = request.getParameter("category");
+    String units_in_stock = request.getParameter("units_in_stock");
+    String condition = request.getParameter("condition");
+  
+    
+ 	Product product = new Product();
+	
+ 	product.setFile(file);
+ 	product.setProductId(product_id);
+ 	product.setName(name);
+ 	product.setUnitPrice(unit_price);
+ 	product.setDescription(description);
+ 	product.setManufacturer(manufacturer);
+ 	product.setCategory(category);
+ 	product.setUnitsInStock(units_in_stock);
+ 	product.setCondition(condition);
+ 	
+    UserRepository userDAO = new  UserRepository();
+    int result = userDAO.insert(user);
+    
+    String root = request.getContextPath();
+	// 회원가입 성공
+	if( result > 0 ) {
+		response.sendRedirect(root + "/user/complete.jsp?msg=1");
+	}
+	// 회원가입 실패
+	else {
+		response.sendRedirect(root + "/user/join.jsp?msg=0");		// msg=0 은 회원가입 실패
+	}
+%>
+    

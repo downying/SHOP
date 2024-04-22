@@ -1,0 +1,123 @@
+package shop.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import shop.dto.Product;
+
+public class ProductRepository extends JDBConnection {
+	
+	/**
+	 * 상품 목록
+	 * @return
+	 */
+	public List<Product> list() {
+		List<Product> productList = new ArrayList<Product>;
+		
+		// SQL 작성
+		String sql = " SELECT * "
+				+ " FROM product ";
+		
+		try {
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while( rs.next() ) {
+				Product product = new Product();
+				
+				product.setProductId("product_id");
+				product.setName("name");
+				product.setUnitPrice("unit_price");
+				product.setDescription("unit_price");
+				product.setManufacturer("unit_price");
+				product.setCategory("unit_price");
+				product.setUnitsInStock("unit_price");
+				product.setCondition("unit_price");
+				product.setFile("unit_price");
+				product.setQuantity("unit_price");
+			}
+		}
+	}
+	
+	
+	/**
+	 * 상품 목록 검색
+	 * @param keyword
+	 * @return
+	 */
+	public List<Product> list(String keyword) {
+		
+	}
+	
+	/**
+	 * 상품 조회
+	 * @param productId
+	 * @return
+	 */
+	public Product getProductById(String productId) {
+		
+	}
+	
+	
+	/**
+	 * 상품 등록
+	 * @param product
+	 * @return
+	 */
+	public int insert(Product product) {
+		
+	}
+	
+	
+	/**
+	 * 상품 수정
+	 * @param product
+	 * @return
+	 */
+	public int update(Product product) {
+		
+	}
+	
+	
+	
+	/**
+	 * 상품 삭제
+	 * @param product
+	 * @return
+	 */
+	public int delete(String productId) {
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

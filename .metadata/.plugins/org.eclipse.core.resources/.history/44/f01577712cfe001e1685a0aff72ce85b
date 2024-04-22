@@ -1,0 +1,45 @@
+<!-- 상품 등록 처리 -->
+
+<%@page import="shop.dao.ProductRepository"%>
+<%@page import="shop.dto.Product"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+    
+        String file = request.getParameter("file");
+        String productId = request.getParameter("productId");
+        String name = request.getParameter("name");
+        int unitPrice = Integer.parseInt(request.getParameter("unitPrice"));
+        String description = request.getParameter("description");
+        String manufacturer = request.getParameter("manufacturer");
+        String category = request.getParameter("category");
+        long unitsInStock = Long.parseLong(request.get("unitsInStock"));
+        String product_condition = request.getParameter("condition");
+
+        // 유효성 검사 로직 추가 가능
+
+        Product product = new Product();
+        product.setFile(file);
+        product.setProductId(productId);
+        
+        product.setName(name);
+        product.setUnitPrice(unitPrice);
+        product.setDescription(description);
+        product.setManufacturer(manufacturer);
+        product.setCategory(category);
+        product.setUnitsInStock(unitsInStock);
+        product.setCondition(product_condition);
+
+        ProductRepository productDAO = new ProductRepository();
+        int result = productDAO.insert(product);
+
+        String productsPage = "/shop/products.jsp";
+        String root = request.getContextPath();
+
+        if (result > 0) {
+            response.sendRedirect(root + productsPage);
+        } else {
+        	out.println("<script>alert('등록에 실패했습니다.'); history.back();</script>");
+        }
+   
+%>

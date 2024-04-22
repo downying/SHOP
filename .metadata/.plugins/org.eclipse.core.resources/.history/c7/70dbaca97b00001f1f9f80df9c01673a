@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>장바구니</title>
+<jsp:include page="/layout/meta.jsp" />
+<jsp:include page="/layout/link.jsp" />
+</head>
+<body>
+	<!-- 헤더 -->
+	<jsp:include page="/layout/header.jsp" />
+
+
+
+	<jsp:include page="/layout/footer.jsp" />
+	<script src="/static/js/validation.js"></script>\
+
+	<script>
+		let cartId = '364390F6F8F89185110CA79ABB791F1D'
+		let cartCount = '0'
+		let cartSum = document.getElementById('cart-sum')
+		
+		function order() {
+			if( cartCount == 0 ) {
+				alert('장바구니에 담긴 상품이 없습니다.')
+				return
+			}
+			let msg = '총 ' + cartCount + '개의 상품을 주문합니다. \n총 주문금액 : ' + cartSum.textContent
+			let check = confirm(msg)
+			if( check ) {
+				location.href = 'ship.jsp?cartId=' + cartId
+			}
+			
+		}
+	</script>
+
+
+</body>
+</html>

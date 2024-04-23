@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="shop.dto.Product"%>
 <%@page import="shop.dao.ProductRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,14 +14,24 @@
 <!-- jQuery CDN 방식으로 포함하기 -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<% 
-	String root = request.getContextPath(); 
-
-	String productId  = request.getParameter("id");
-	ProductRepository productDAO = new ProductRepository();
-	Product product = productDAO.getProductById(productId);
-%>
 <body>  
+	<%
+		String root = request.getContextPath(); 
+	
+		String productId  = request.getParameter("id");
+		ProductRepository productDAO = new ProductRepository();
+		Product product = productDAO.getProductById(productId);
+	
+		// 세션에 저장한 장바구니 상품리스트 빼오기
+		List<Product> cartList = (List<Product>) session.getAttribute("cartList");
+	
+		// 카트가 null인지 확인
+		if (cartList == null) {
+			session.setAttribute("cartList", cartList);
+			cartList = new ArrayList<>(); // 새로운 카트 생성
+		}
+	%>
+	
 	<!-- 헤더 -->
 	<jsp:include page="/layout/header.jsp" />
 	
@@ -79,11 +91,11 @@
 				</tbody>
 				
 				</table>
-				<form name="addForm" action="./addCart.jsp" method="post">
-						<input type="hidden" name="id" value="P100001">
+				<form name="addForm" action="addCart.jsp" method="post">
+						<input type="hidden" name="id" value="<%= product.getProductId() %>">
 						<div class="btn-box d-flex justify-content-end ">
 							<!-- [NEW] 장바구니 버튼 추가 -->
-							<a href="./cart.jsp" class="btn btn-lg btn-warning mx-3">장바구니</a>
+							<a href="cart.jsp" class="btn btn-lg btn-warning mx-3">장바구니</a>
 							
 							<!-- 페이지 이동 막기 :  href="javascript:;" -->			
 							<a href="javascript:;" class="btn btn-lg btn-success mx-3" onclick="addToCart()">주문하기</a>

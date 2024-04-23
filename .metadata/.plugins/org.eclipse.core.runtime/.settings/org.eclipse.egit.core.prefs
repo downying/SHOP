@@ -1,5 +1,6 @@
 GitRepositoriesView.GitDirectories=D\:\\DOWNY\\SHOP\\.git;D\:\\DOWNY\\SHOP\\Shop_Test\\Shop_test\\.git;
 GitRepositoriesView.GitDirectories.relative=.git;Shop_Test\\Shop_test\\.git;
 RepositoryGroups.uuids=
+core_autoIgnoreDerivedResources=false
 core_git_servers=
 eclipse.preferences.version=1

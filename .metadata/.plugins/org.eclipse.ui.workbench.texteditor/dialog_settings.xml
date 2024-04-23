@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="cartList.size()"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="cartList.size()"/>
+			<item value="delete"/>
+			<item value="order"/>
+			<item value="cart"/>
+			<item value="cartList"/>
 			<item value="파일 선택"/>
 			<item value="add.jsp"/>
 			<item value="orderList"/>
 			<item value="orderPhone"/>
-			<item value="order"/>
 			<item value="oder"/>
 			<item value="update"/>
 			<item value="join_pro"/>
 			<item value="id=&quot;&quot;"/>
 			<item value="input type"/>
 			<item value="input"/>
-			<item value="Shologin"/>
-			<item value="login"/>
-			<item value="shop"/>
-			<item value="msg"/>
 		</list>
 		<list key="replacehistory">
 		</list>

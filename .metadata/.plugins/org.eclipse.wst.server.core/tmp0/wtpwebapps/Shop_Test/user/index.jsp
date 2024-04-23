@@ -9,15 +9,15 @@
 	<title>Shop</title>
 	<jsp:include page="/layout/meta.jsp" /> <jsp:include page="/layout/link.jsp" />
 </head>
-<%
-	String root = request.getContextPath();
-	String loginId = request.getParameter("loginId");
-	Boolean login = false;
-	if( login != null ) {
-		login = true;
-	}
-%>
 <body>   
+	<%
+		String root = request.getContextPath();
+		String loginId = request.getParameter("loginId");
+		Boolean login = false;
+		if( login != null ) {
+			login = true;
+		}
+	%>
 	
 	<jsp:include page="/layout/header.jsp" />
 	

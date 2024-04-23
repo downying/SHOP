@@ -78,6 +78,7 @@
    if( loginUser != null) {
 	      // 로그인 성공 시에만 complete.jsp로 이동
 	      session.setAttribute("loginId", loginUser.getId() );
+	      
 	      response.sendRedirect( root + "/user/complete.jsp?msg=0" );
 	   } 
 %>

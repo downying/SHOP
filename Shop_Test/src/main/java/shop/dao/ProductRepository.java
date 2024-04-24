@@ -193,15 +193,16 @@ public class ProductRepository extends JDBConnection {
 		try {
 			psmt = con.prepareStatement(sql);
 			
-			psmt.setString( 1, product.getFile());
-			psmt.setString( 2, product.getProductId());
-			psmt.setString( 3, product.getName());
-			psmt.setInt( 4, product.getUnitPrice());
-			psmt.setString( 5, product.getDescription());
-			psmt.setString( 6, product.getManufacturer());
-			psmt.setString( 7, product.getCategory());
-			psmt.setLong( 8, product.getUnitsInStock());
-			psmt.setString( 9, product.getCondition());
+			 psmt.setString( 1, product.getFile());
+		        psmt.setString( 2, product.getProductId());
+		        psmt.setString( 3, product.getName());
+		        psmt.setInt( 4, product.getUnitPrice());
+		        psmt.setString( 5, product.getDescription());
+		        psmt.setString( 6, product.getManufacturer());
+		        psmt.setString( 7, product.getCategory());
+		        psmt.setLong( 8, product.getUnitsInStock());
+		        psmt.setString( 9, product.getCondition());
+		        psmt.setString(10, product.getProductId());
 		
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {

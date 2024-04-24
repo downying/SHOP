@@ -15,6 +15,17 @@
     // 세션에서 장바구니 목록을 가져옴
     List<Product> cartList = (List<Product>) session.getAttribute("cartList");
 
+ 	// 세션에 장바구니 목록이 없으면 새로운 ArrayList 생성하여 저장
+    if (cartList == null) {
+    	cartList = new ArrayList<Product>();
+        session.setAttribute("cartList", cartList);
+    }
+ 	
+    // "deleteAll" 파라미터가 있을 때 처리
+    if (deleteAll != null && "true".equals(deleteAll)) {
+        // 전체 상품 삭제일 경우
+        cartList.clear();
+    }
 
     // 개별 상품 삭제 또는 전체 상품 삭제 처리
     if (productId != null) {
@@ -26,11 +37,9 @@
                 break;
             }
         }
-    } else if ("true".equals(deleteAll)) {
-        // 전체 상품 삭제일 경우
-        cartList.clear();
-    }
-
+    } 
+    
+    
     // 변경된 장바구니 정보를 세션에 다시 저장
     session.setAttribute("cartList", cartList);
 

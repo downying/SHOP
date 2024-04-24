@@ -119,7 +119,8 @@
   		function order1() {
   			if( cartCount == 0 ) {
   				alert('장바구니에 담긴 상품이 없습니다.')
-  				return
+  				location.href = 'cart.jsp'
+  				return false;
   			}
   			let msg = '총 ' + cartCount + '개의 상품을 주문합니다. \n총 주문금액 : ' + cartSum + '원';
   			let check = confirm(msg)

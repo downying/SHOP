@@ -46,8 +46,8 @@
             product.setFile(filePath); // 파일 경로 설정
             
             // 데이터베이스에 상품 등록
-            ProductRepository productRepository = new ProductRepository();
-            int result = productRepository.insert(product);
+            ProductRepository productDAO = new ProductRepository();
+            int result = productDAO.insert(product);
             
             String root = request.getContextPath();
             

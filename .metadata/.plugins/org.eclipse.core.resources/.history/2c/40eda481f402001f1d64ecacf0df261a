@@ -1,0 +1,39 @@
+<%@page import="javax.websocket.SendResult"%>
+<%@page import="shop.dto.Order"%>
+<%@page import="shop.dao.OrderRepository"%>
+<%@page import="shop.dao.ProductRepository"%>
+<%@page import="shop.dto.Product"%>
+<%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+	
+	// 파라미터로 전달받은 배송 및 주문정보
+	String name = request.getParameter("name");
+	String shippingDate = request.getParameter("shippingDate");
+	String country = request.getParameter("country");
+	String zipCode = request.getParameter("zipCode");
+	String addressName = request.getParameter("addressName");
+	String phone = request.getParameter("phone");
+	
+	OrderRepository orderDAO = new OrderRepository();
+	Order order = new Order();
+	
+	order.setShipName(name);
+	order.setDate(shippingDate);
+	order.setCountry(country);
+	order.setZipCode(zipCode);
+	order.setAddress(addressName);
+	order.setPhone(phone);
+	
+	// 배송정보 (Order객체 세션에 저장)
+	session.setAttribute("order", order);
+	
+	String root = request.getContextPath();
+	response.sendRedirect( root + "/shop/order.jsp" );
+	
+%>

@@ -1,6 +1,7 @@
 package shop.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import shop.dto.Order;
@@ -45,19 +46,64 @@ public class OrderRepository extends JDBConnection {
 	 * @return
 	 */
 	public int lastOrderNo() {
+		int no = 0;
+		String sql = " SELECT MAX(order_no) AS max_no "
+					+ " FROM `order` ";
 		
+		try {
+			psmt = con.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				no = rs.getInt("max_no");
+			}
+		} catch (Exception e) {
+			System.err.println("최근 주문 상품 조회 시 예외 발생");
+			e.printStackTrace();
+		}
+		return no;
 	}
 
-	
 	/**
 	 * 주문 내역 조회 - 회원
 	 * @param userId
 	 * @return
 	 */
 	public List<Product> list(String userId) {
+		List<Product> productList = new ArrayList<>();
+		
+		String sql = "SELECT pio.order_no AS order_no "
+				+	 " , p.name AS name"
+				+	 " , p.unit_price AS unit_price "
+				+	 " , pio.amount AS amount "
+				+    " , (p.unit_price * pio.amount) AS total_price"
+				+ 	 " FROM `product_io` pio "
+				+    " JOIN `product` p ON p.product_id = pio.product_id "
+				+ 	 " JOIN `order` o ON o.order_no = pio.order_no "
+				+    " WHERE pio.user_id = ?";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, userId);
+			rs = psmt.executeQuery();
 
+			while (rs.next()) {
+
+				Product product = new Product();
+				product.setOrderNo(rs.getInt("order_no"));
+				product.setName(rs.getString("name"));
+				product.setUnitPrice(rs.getInt("unit_price"));
+				product.setQuantity(rs.getInt("amount"));
+				productList.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("주문 내역 조회 중 에러가 발생하였습니다.");
+		}
+
+		return productList;
 	}
-	
+
 	/**
 	 * 주문 내역 조회 - 비회원
 	 * @param phone
@@ -65,8 +111,38 @@ public class OrderRepository extends JDBConnection {
 	 * @return
 	 */
 	public List<Product> list(String phone, String orderPw) {
+		List<Product> productList = new ArrayList<>();
 		
+		String sql = "SELECT pio.order_no AS order_no, p.name AS name, p.unit_price AS unit_price, "
+		           + "pio.amount AS amount, "
+		           + "(p.unit_price * pio.amount) AS total_price "
+		           + "FROM `product_io` pio "
+		           + "JOIN `order` o ON pio.order_no = o.order_no "
+		           + "JOIN `product` p ON p.product_id = pio.product_id "
+		           + "WHERE o.phone = ? "
+		           + "AND o.order_pw = ?";
 		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, phone);
+			psmt.setString(2, orderPw);
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+
+				Product product = new Product();
+				product.setOrderNo(rs.getInt("order_no"));
+				product.setName(rs.getString("name"));
+				product.setUnitPrice(rs.getInt("unit_price"));
+				product.setQuantity(rs.getInt("amount"));
+				productList.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("주문 내역 조회 중 에러가 발생하였습니다.");
+		}
+
+		return productList;
 	}
 	
 }

@@ -1,0 +1,30 @@
+<%@page import="shop.dto.Order"%>
+<%@page import="shop.dao.OrderRepository"%>
+<%@page import="shop.dto.Ship"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+
+	//필요한 정보를 받아옵니다.
+	String orderType = request.getParameter("orderType");
+	String name = request.getParameter("name");
+	String zipCode = request.getParameter("zipCode");
+	String address = request.getParameter("address");
+	String shippingDate = request.getParameter("shippingDate");
+	String phone = request.getParameter("phone");
+	
+	//회원/비회원 여부를 확인
+	String loginId = (String) session.getAttribute("loginId"); // 회원 아이디
+	String phoneNumber = (String) request.getParameter("phoneNumber"); // 비회원 전화번호
+
+	 // Ship 객체 생성 및 데이터 설정
+    Order order = new Order();
+    order.setShipName(name);
+    order.setDate(shippingDate);
+    order.setCountry(country);
+    order.setZipCode(zipCode);
+    order.setAddress(addressName);
+    order.setPhone(phone);
+    
+
+%>

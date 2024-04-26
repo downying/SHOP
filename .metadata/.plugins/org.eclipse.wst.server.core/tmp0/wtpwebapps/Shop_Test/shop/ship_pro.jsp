@@ -13,7 +13,6 @@
 	String phone = request.getParameter("phone");
 	
 	// Ship 객체 생성 및 데이터 설정
-	OrderRepository orderDAO = new OrderRepository();
 	Order order = new Order();
 	order.setShipName(name);
 	order.setDate(shippingDate);

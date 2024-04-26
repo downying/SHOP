@@ -1,0 +1,81 @@
+<%@page import="shop.dto.Order"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>주문 완료</title>
+<jsp:include page="/layout/meta.jsp" />
+<jsp:include page="/layout/link.jsp" />
+</head>
+<body>   
+<%
+	//회원/비회원 여부를 확인
+	String userId = (String) session.getAttribute("loginId"); // 회원 아이디
+	String order_pw = request.getParameter("orderPw"); // 비회원 비밀번호
+	
+	String phone = (String) request.getParameter("phoneNumber"); // 비회원 전화번호
+
+	String name = request.getParameter("name");
+	String shippingDate = request.getParameter("shippingDate");
+	String country = request.getParameter("country");
+	String zipCode = request.getParameter("zipCode");
+	String addressName = request.getParameter("addressName");
+	
+	// Ship 객체 생성 및 데이터 설정
+	Order order = new Order();
+	
+	order.setShipName(name);
+	order.setDate(shippingDate);
+	order.setCountry(country);
+	order.setZipCode(zipCode);
+	order.setAddress(addressName);
+	order.setPhone(phone);
+	
+	order.setUserId(userId);
+	if(userId == null) { 
+		order.setOrderPw(order_pw);
+		order.setPhone(phone);
+	}
+	
+%>	
+
+	<jsp:include page="/layout/header.jsp" />
+
+	<div class="px-4 py-5 my-5 text-center">
+		<h1 class="display-5 fw-bold text-body-emphasis">주문 완료</h1>
+	</div>
+	
+	<!-- 주문 완료 확인 -->
+	
+	<div class="container order mb-5 p-5">
+		
+		<h2 class="text-center">주문이 완료되었습니다.</h2>
+		<!-- 주문정보 -->
+		<div class="ship-box">
+			<table class="table ">
+				<tbody><tr>
+					<td>주문번호 :</td>
+					<td><%= userId %></td>
+				</tr>
+				<tr>
+					<td>배송지 :</td>
+					<td><%=  %></td>
+				</tr>
+			</tbody></table>
+			
+			<div class="btn-box d-flex justify-content-center">
+				<a href="/user/order.jsp" class="btn btn-primary btn-lg px-4 gap-3">주문내역</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- 푸터 -->
+	<jsp:include page="/layout/footer.jsp" />
+	<script src="/static/js/validation.js"></script>
+
+
+</body>
+</html>

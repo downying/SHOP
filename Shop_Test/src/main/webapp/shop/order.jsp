@@ -22,8 +22,6 @@
 	<%
 	// Ship_pro에서 Order 세션 가져오기
 			Order order = (Order) session.getAttribute("order");
-			System.out.println(order);
-			// 회원/비회원 여부를 확인
 			String loginId = (String) session.getAttribute("loginId"); // 회원 아이디
 			String phoneNumber = (String) request.getParameter("phoneNumber"); // 비회원 전화번호
 			

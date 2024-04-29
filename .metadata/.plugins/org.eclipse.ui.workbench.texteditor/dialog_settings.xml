@@ -8,6 +8,9 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="phoneNumber"/>
+			<item value="phone"/>
+			<item value="order_pro"/>
 			<item value="cartList.size()"/>
 			<item value="delete"/>
 			<item value="order"/>
@@ -20,9 +23,6 @@
 			<item value="oder"/>
 			<item value="update"/>
 			<item value="join_pro"/>
-			<item value="id=&quot;&quot;"/>
-			<item value="input type"/>
-			<item value="input"/>
 		</list>
 		<list key="replacehistory">
 		</list>

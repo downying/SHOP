@@ -21,24 +21,24 @@
 <body>
 	<%
 	// Ship_pro에서 Order 세션 가져오기
-			Order order = (Order) session.getAttribute("order");
-			String loginId = (String) session.getAttribute("loginId"); // 회원 아이디
-			String phoneNumber = (String) request.getParameter("phoneNumber"); // 비회원 전화번호
-			
-			boolean checkLogin = false; // 초기 : 비로그인 상태
-			if(loginId != null) { checkLogin = true; } // 로그인아이디가 존재할 경우 로그인 상태로 바뀜
-			String orderLogin = "비회원 주문";	// 초기 : 비회원 주문
-			// 만약 checkLogin = true 일 경우 orderLogin = "회원 주문" 으로 설정
-			
-			List<Product> cartList = (List<Product>) session.getAttribute("cartList");
-			
-			// 카트가 null인지 확인
-			if (cartList == null) {
-				session.setAttribute("cartList", cartList);
-				cartList = new ArrayList<>(); // 새로운 카트 생성
-			}
+	Order order = (Order) session.getAttribute("order");
+	String loginId = (String) session.getAttribute("loginId"); // 회원 아이디
+	String phone = (String) request.getParameter("phone"); // 비회원 전화번호
+	
+	boolean checkLogin = false; // 초기 : 비로그인 상태
+	if(loginId != null) { checkLogin = true; } // 로그인아이디가 존재할 경우 로그인 상태로 바뀜
+	String orderLogin = "비회원 주문";	// 초기 : 비회원 주문
+	// 만약 checkLogin = true 일 경우 orderLogin = "회원 주문" 으로 설정
+	
+	List<Product> cartList = (List<Product>) session.getAttribute("cartList");
+	
+	// 카트가 null인지 확인
+	if (cartList == null) {
+		session.setAttribute("cartList", cartList);
+		cartList = new ArrayList<>(); // 새로운 카트 생성
+	}
 
-			int sum = 0;
+	int sum = 0;
 	%>
 	<!-- 헤더 -->
 	<jsp:include page="/layout/header.jsp" />

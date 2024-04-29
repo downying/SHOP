@@ -25,7 +25,7 @@
 		    cartList = new ArrayList<>(); // 새로운 카트 생성
 		}
 		
-	   int sum = 0;
+	   int totalPrice = 0;
 		
 	%>
 	
@@ -66,7 +66,7 @@
 			} else {
 			for (Product product : cartList) {
 				
-				sum += product.getQuantity() * product.getUnitPrice();
+				totalPrice += product.getQuantity() * product.getUnitPrice();
 			%>
 			<tr>
 				<td><%=product.getName()%></td>
@@ -89,7 +89,7 @@
 					<td></td>
 					<td></td>
 					<td>총액</td>
-					<td id="sum">₩ <%=sum%></td>
+					<td id="total-price">₩ <%= totalPrice %></td>
 					<td></td>
 				</tr>
 			</tfoot>
@@ -114,7 +114,7 @@
    <script>
 
   		let cartCount = <%= cartList != null ? cartList.size() : 0 %>;
-		let cartSum = <%= sum %>; // 총 주문금액 가져오기
+		let cartSum = <%= totalPrice %>; // 총 주문금액 가져오기
   		
   		function order1() {
   			if( cartCount == 0 ) {

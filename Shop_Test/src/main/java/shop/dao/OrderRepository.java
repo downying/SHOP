@@ -111,7 +111,7 @@ public class OrderRepository extends JDBConnection {
 	 * @return
 	 */
 	public List<Product> list(String phone, String orderPw) {
-		List<Product> productList = new ArrayList<>();
+		List<Product> orderList  = new ArrayList<>();
 		
 		String sql = "SELECT pio.order_no AS order_no, p.name AS name, p.unit_price AS unit_price, "
 		           + "pio.amount AS amount, "
@@ -135,14 +135,14 @@ public class OrderRepository extends JDBConnection {
 				product.setName(rs.getString("name"));
 				product.setUnitPrice(rs.getInt("unit_price"));
 				product.setQuantity(rs.getInt("amount"));
-				productList.add(product);
+				orderList.add(product);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("주문 내역 조회 중 에러가 발생하였습니다.");
 		}
 
-		return productList;
+		return orderList ;
 	}
 	
 }

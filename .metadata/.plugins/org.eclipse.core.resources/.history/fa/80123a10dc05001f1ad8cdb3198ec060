@@ -1,0 +1,27 @@
+<%@page import="shop.dto.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="shop.dao.OrderRepository"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+
+	String root = request.getContextPath();
+
+	//세션에서 사용자 정보 가져오기 
+	// 비회원
+	String orderPw = request.getParameter("orderPw");
+	String phone = request.getParameter("phoneNumber");
+	
+	// 주문 내역 조회
+	OrderRepository orderDAO = new OrderRepository();
+	List<Product> orderList = orderDAO.list(phone, orderPw);	
+	
+	// 주문 내역을 세션에 저장
+    if(orderList != null && !orderList.isEmpty()) {
+        session.setAttribute("orderPhone", phone);
+     	session.setAttribute("orderPw", orderPw);
+        response.sendRedirect(root + "/user/order.jsp");
+    } else {
+    	out.println("<script>alert('주문 내역 조회에 실패했습니다.');history.back();</script>");
+    }
+%>
